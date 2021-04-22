@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import groovyjarjarpicocli.CommandLine.Model;
 import int221.practice.models.Brand;
+import int221.practice.models.Color;
 import int221.practice.models.Product;
+import int221.practice.repositories.ColorJpaRepository;
 import int221.practice.repositories.ProductsJpaRepository;
 
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.Optional;
 public class ProductsRestController {
 	@Autowired
 	ProductsJpaRepository productsJpaRepository;
+	ColorJpaRepository colorJpaRepository;
 
 //	@GetMapping("/products/{code}")
 //	public Product show(@PathVariable String code) {
@@ -34,25 +38,24 @@ public class ProductsRestController {
 
 	@RequestMapping // รับrequestทุกชนิด
 	public String request() {
-
-		return;
-	};
-
-	@GetMapping // รับแบบget
-	public String get() {
-
-		return;
-	};
-
-	@PostMapping // รับแบบPost
-	public String post() {
 		
 		return;
 	};
 
-	@PutMapping // รับแบบPut
+	@GetMapping("/color/{colorId}") // รับแบบget
+	public Color getColor(@PathVariable String colorId) {
+		return colorJpaRepository.findById(colorId).orElse(null);
+	};
+
+	@PostMapping("/form") // รับแบบPost
+	public String post(Product product ) {
+		productsJpaRepository.save(product);
+		return product.getProductId();
+	};
+
+	@PutMapping() // รับแบบPut
 	public String put() {
-		
+
 		return;
 	};
 
