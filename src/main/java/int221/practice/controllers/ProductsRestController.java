@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class 	t {
+public class ProductsRestController {
 	@Autowired
 	ProductsJpaRepository productsJpaRepository;
 
@@ -31,7 +31,7 @@ public class 	t {
 //	public List<Product> allProducts() {
 //		return productsJpaRepository.findAll();
 //	}
- 
+
 	@RequestMapping // รับrequestทุกชนิด
 	public String request() {
 
@@ -46,20 +46,24 @@ public class 	t {
 
 	@PostMapping // รับแบบPost
 	public String post() {
-
+		
 		return;
 	};
 
 	@PutMapping // รับแบบPut
 	public String put() {
-
+		
 		return;
 	};
 
-	@DeleteMapping // รับแบบDelete
-	public String delete() {
-
-		return;
+	@DeleteMapping("/products/{id}") // รับแบบDelete
+	public void delete(@PathVariable String id) {
+		for (int i = 0; i < productsJpaRepository.findAll().size(); i++) {
+			if (productsJpaRepository.findById(id).equals(id)) {
+				productsJpaRepository.deleteById(id);
+				break;
+			}
+		}
 	};
 
 }
