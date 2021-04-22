@@ -20,21 +20,20 @@ public class Product {
 	private String name;
 	private int price;
 	private String description;
-	private Date productDate;
+	private Date manufactureDate;
 	private String brandfk;
 	private String haveId;
 
 	public Product() {
 	};
 
-	public Product(String productId, String name, int price, String description, Date productDate, String brandfk,
+	public Product(String productId, String name, int price, String description, Date manufactureDate, String brandfk,
 			String haveId) {
-		super();
 		this.productId = productId;
 		this.name = name;
 		this.price = price;
 		this.description = description;
-		this.productDate = productDate;
+		this.manufactureDate = manufactureDate;
 		this.brandfk = brandfk;
 		this.haveId = haveId;
 	}
@@ -72,11 +71,11 @@ public class Product {
 	}
 
 	public Date getProductDate() {
-		return productDate;
+		return manufactureDate;
 	}
 
 	public void setProductDate(Date productDate) {
-		this.productDate = productDate;
+		this.manufactureDate = productDate;
 	}
 
 	public String getBrandfk() {

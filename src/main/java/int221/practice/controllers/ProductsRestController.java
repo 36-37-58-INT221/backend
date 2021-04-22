@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class ProductsRestController {
+public class 	t {
 	@Autowired
 	ProductsJpaRepository productsJpaRepository;
 

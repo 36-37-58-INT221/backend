@@ -13,7 +13,6 @@ public class Brand {
 	};
 
 	public Brand(String brandId, String name) {
-		super();
 		this.brandId = brandId;
 		this.name = name;
 	}

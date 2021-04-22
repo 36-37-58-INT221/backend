@@ -8,15 +8,14 @@ public class Color {
 
 	@Id
 	private String colorId;
-	private String code;
+	private String colorCode;
 
 	public Color() {
 	};
 
 	public Color(String colorId, String colorCode) {
-		super();
 		this.colorId = colorId;
-		this.code = colorCode;
+		this.colorCode = colorCode;
 	}
 
 	public String getColorId() {
@@ -28,11 +27,11 @@ public class Color {
 	}
 
 	public String getColorCode() {
-		return code;
+		return colorCode;
 	}
 
 	public void setColorCode(String colorCode) {
-		this.code = colorCode;
+		this.colorCode = colorCode;
 	}
 
 }
