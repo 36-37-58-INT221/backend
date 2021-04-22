@@ -1,10 +1,10 @@
 # backend
 
-# restcontroller \
+## restcontroller 
    -แก้ไขที่package int221.practice.controllers ไฟล์ที่่ชื่อ ProductsRestController 
    
-# models(แก้ไขเมื่อDBมีการเปลี่ยนแปลง)\
+## models(แก้ไขเมื่อDBมีการเปลี่ยนแปลง)
    -แก้ไขที่package int221.practice.models 
 
-# repository\
+## repository
   -แก้ไขที่package int221.practice.repositories ไฟล์ที่่ชื่อ ProductsJpaRepository
