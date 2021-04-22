@@ -8,3 +8,7 @@
 
 ## repository
   -แก้ไขที่package int221.practice.repositories ไฟล์ที่่ชื่อ ProductsJpaRepository
+  
+
+อย่างอื่นยังไม่ต้องไปสนใจ
+  
