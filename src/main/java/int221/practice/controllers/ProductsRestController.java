@@ -13,6 +13,7 @@ import groovyjarjarpicocli.CommandLine.Model;
 import int221.practice.models.Brand;
 import int221.practice.models.Color;
 import int221.practice.models.Product;
+import int221.practice.repositories.BrandJpaRepository;
 import int221.practice.repositories.ColorJpaRepository;
 import int221.practice.repositories.ProductsJpaRepository;
 
@@ -24,6 +25,7 @@ public class ProductsRestController {
 	@Autowired
 	ProductsJpaRepository productsJpaRepository;
 	ColorJpaRepository colorJpaRepository;
+	BrandJpaRepository brandJpaRepository;
 
 //	@GetMapping("/products/{code}")
 //	public Product show(@PathVariable String code) {
@@ -45,6 +47,11 @@ public class ProductsRestController {
 	@GetMapping("/color/{colorId}") // รับแบบget
 	public Color getColor(@PathVariable String colorId) {
 		return colorJpaRepository.findById(colorId).orElse(null);
+	};
+	
+	@GetMapping("/brand/{brandId}") // รับแบบget
+	public Brand getBrand(@PathVariable String brandId) {
+		return brandJpaRepository.findById(brandId).orElse(null);
 	};
 
 	@PostMapping("/form") // รับแบบPost
