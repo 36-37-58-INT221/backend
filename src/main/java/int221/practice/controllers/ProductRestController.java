@@ -40,7 +40,7 @@ public class ProductRestController {
         Page<Product> pageResult = productRepository.findAll(pageable);
         return pageResult.getContent();
     }
-    @PostMapping("/uploadImage")
+    @PostMapping("/api/uploadImage")
     public String uploadImage(@RequestParam("imageFile") MultipartFile imageFile) {
     	String returnValue = "start";
     	try {

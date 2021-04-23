@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import groovyjarjarpicocli.CommandLine.Model;
 import int221.practice.models.Brand;
 import int221.practice.models.Color;
+import int221.practice.models.ExtendService;
 import int221.practice.models.Product;
 import int221.practice.repositories.BrandJpaRepository;
 import int221.practice.repositories.ColorJpaRepository;
@@ -26,6 +29,7 @@ public class ProductsRestController {
 	ProductsJpaRepository productsJpaRepository;
 	ColorJpaRepository colorJpaRepository;
 	BrandJpaRepository brandJpaRepository;
+	ExtendService ES;
 
 //	@GetMapping("/products/{code}")
 //	public Product show(@PathVariable String code) {
@@ -75,5 +79,15 @@ public class ProductsRestController {
 			}
 		}
 	};
-
+    @PostMapping("/uploadImage")
+    public String uploadImage(@RequestParam("imageFile") MultipartFile imageFile) {
+    	String returnValue = "start";
+    	try {
+    		ES.saveImage(imageFile);
+    	}catch (Exception e) {
+    		e.printStackTrace();
+			returnValue = "error";
+		}
+    	return returnValue;
+    }
 }
