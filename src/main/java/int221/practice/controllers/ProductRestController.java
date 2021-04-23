@@ -7,7 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import int221.practice.models.ExtendService;
 import int221.practice.models.Product;
 import int221.practice.repositories.ProductRepository;
 
@@ -17,7 +19,8 @@ import java.util.List;
 public class ProductRestController {
     @Autowired
     private ProductRepository productRepository;
-
+    @Autowired
+    private ExtendService ES;
     @GetMapping("/api/show/{id}")
     public Product show(@PathVariable Long id) {
        return productRepository.findById(id).orElse(null);
@@ -37,5 +40,15 @@ public class ProductRestController {
         Page<Product> pageResult = productRepository.findAll(pageable);
         return pageResult.getContent();
     }
-
+    @PostMapping("/uploadImage")
+    public String uploadImage(@RequestParam("imageFile") MultipartFile imageFile) {
+    	String returnValue = "start";
+    	try {
+    		ES.saveImage(imageFile);
+    	}catch (Exception e) {
+    		e.printStackTrace();
+			returnValue = "error";
+		}
+    	return returnValue;
+    }
 }
