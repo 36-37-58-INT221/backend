@@ -54,8 +54,12 @@ public class ProductsRestController {
 	};
 	
 	@GetMapping("/brand/{brandId}") // รับแบบget
-	public Brand getBrand(@PathVariable String brandId) {
 		return brandJpaRepository.findById(brandId).orElse(null);
+	};
+	
+	@GetMapping("/products}") // รับแบบget
+	public List<Product> getAllProduct() {
+		return productsJpaRepository.findAll();
 	};
 
 	@PostMapping("/form") // รับแบบPost
@@ -64,13 +68,13 @@ public class ProductsRestController {
 		return product.getProductId();
 	};
 
-	@PutMapping() // รับแบบPut
-	public String put() {
-
-		return;
+	@PutMapping("/products/put/{id}") // รับแบบPut
+	public Product put(@RequestParam Product product,@PathVariable String id ) {
+		ES.updateProduct(id, product);
+		return product;
 	};
 
-	@DeleteMapping("/products/{id}") // รับแบบDelete
+	@DeleteMapping("/products/delete/{id}") // รับแบบDelete
 	public void delete(@PathVariable String id) {
 		for (int i = 0; i < productsJpaRepository.findAll().size(); i++) {
 			if (productsJpaRepository.findById(id).equals(id)) {
