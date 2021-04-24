@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import groovyjarjarpicocli.CommandLine.Model;
+import int221.practice.exceptions.AllException;
+import int221.practice.exceptions.ExceptionResponse;
 import int221.practice.models.Brand;
 import int221.practice.models.Color;
 import int221.practice.models.ExtendService;
@@ -54,6 +56,7 @@ public class ProductsRestController {
 	};
 	
 	@GetMapping("/brand/{brandId}") // รับแบบget
+	public Brand getBrand(@PathVariable String brandId) {
 		return brandJpaRepository.findById(brandId).orElse(null);
 	};
 	
@@ -63,19 +66,28 @@ public class ProductsRestController {
 	};
 
 	@PostMapping("/form") // รับแบบPost
-	public String post(Product product ) {
+	public String post(Product product) {
 		productsJpaRepository.save(product);
+		if(productsJpaRepository.existsById(product.getProductId())){
+			throw new AllException(ExceptionResponse.ERROR_CODE.PRODUCT_ALREADY_EXIST, "id: {" + product.getProductId() + "} already exist !!");
+		}
 		return product.getProductId();
 	};
 
 	@PutMapping("/products/put/{id}") // รับแบบPut
 	public Product put(@RequestParam Product product,@PathVariable String id ) {
+		if(productsJpaRepository.findById(id) ==null) {
+			throw new AllException(ExceptionResponse.ERROR_CODE.PRODUCT_ALREADY_EXIST, "id: {" + product.getProductId() + "} already exist !!");
+		}
 		ES.updateProduct(id, product);
 		return product;
 	};
 
 	@DeleteMapping("/products/delete/{id}") // รับแบบDelete
 	public void delete(@PathVariable String id) {
+		if(productsJpaRepository.findById(id) == null) {
+			throw new AllException(ExceptionResponse.ERROR_CODE.DOES_NOT_FIND_ID, "Does not fine Id!!");
+		}
 		for (int i = 0; i < productsJpaRepository.findAll().size(); i++) {
 			if (productsJpaRepository.findById(id).equals(id)) {
 				productsJpaRepository.deleteById(id);
